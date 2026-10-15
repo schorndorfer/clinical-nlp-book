@@ -1,0 +1,21 @@
+project:
+  type: book
+  output-dir: _book
+
+book:
+  title: "Clinical NLP: From Notes to Evidence"
+  author: "Will Thompson"
+  chapters:
+    - index.qmd
+    - chapters/01-foundations.qmd
+    - chapters/02-assertions.qmd
+    - chapters/03-evaluation.qmd
+
+format:
+  html:
+    toc: true
+    number-sections: true
+    theme: cosmo
+
+execute:
+  freeze: auto

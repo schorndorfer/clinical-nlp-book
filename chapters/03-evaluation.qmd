@@ -1,0 +1,15 @@
+# Evaluate the question, not just the code
+
+The notebook compares each predicted assertion to a hand-assigned gold label. **Accuracy** is the fraction of examples with an exact label match. For a label such as `absent`, **precision** asks what fraction of predicted `absent` examples truly have that label; **recall** asks what fraction of gold `absent` examples were found. A confusion table shows which labels are mixed up, not just how often the system is wrong.
+
+Five or ten toy sentences cannot establish clinical performance. They are useful for catching obvious logic errors and discussing failure modes. For a real evaluation:
+
+1. Freeze the target definition, annotation guide, and inclusion criteria before scoring.
+2. Sample from the intended deployment setting; include notes without target mentions and with multiple or conflicting mentions.
+3. Separate development and test sets **by patient**, and, where relevant, by institution or time. Splitting individual notes at random can leak repeated patient history into both sets.
+4. Report per-label counts, precision, recall, and confidence intervals where appropriate. Review errors by note type and relevant patient subgroups, consistent with privacy and governance rules.
+5. Evaluate the full workflow, including missing notes, extraction failures, downstream aggregation, and human review—not only a classifier on curated sentences.
+
+The answer to “currently has pneumonia” may be different from the answer to “has ever been evaluated for pneumonia.” Neither metric is meaningful without its target definition and reference standard.
+
+**Exercise:** Design an annotation guide for a note with both “No pneumonia on imaging” and “Treat empirically for possible pneumonia.” Would you assign one note-level label, two mention-level labels, or both? Explain how you would score a system that returns only one label.

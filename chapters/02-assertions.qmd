@@ -1,0 +1,25 @@
+# A transparent assertion baseline
+
+A baseline should be easy to inspect and easy to break. Our first system looks for a single `pneumonia` mention in each synthetic note, then checks a small window immediately before it for context cues. It returns one of five labels: `present`, `absent`, `historical`, `possible`, or `other_experiencer`.
+
+Open the [interactive marimo notebook](../notebooks/01_assertions.py) from the project root:
+
+```bash
+uv run marimo edit notebooks/01_assertions.py
+```
+
+The notebook contains the fictional data, the implementation, a cue-window slider, and a comparison to hand-assigned labels. It uses only Python's standard library plus marimo, and needs no network access or clinical dataset.
+
+## The rule in words
+
+1. Locate the condition as a whole word rather than as part of a longer word.
+2. Inspect only a configurable number of words immediately before the mention.
+3. Apply a fixed priority: family-history cue, negation cue, history cue, uncertainty cue, then default to present.
+
+Priority is a modeling choice, not a clinical truth. A rule that checks for negation before family history could interpret “Mother has no pneumonia” differently. A narrow window can miss “Pneumonia is not present,” since `not` follows the mention; a broad window can attach a cue to the wrong mention. The notebook includes both kinds of error to investigate.
+
+## What this baseline does not do
+
+It does not resolve multiple mentions, infer dates, normalize synonyms to clinical terminologies, parse section headings, detect copied-forward text, or distinguish patient from family member in general prose. It also cannot infer whether a finding is true merely because the note asserts it. Treat the output as a demonstration of **text classification under a specific annotation contract**, not a diagnosis.
+
+**Exercise:** Change the cue window in the notebook. Which examples change label, and why? Add a synthetic example that defeats the rule without changing its annotation contract. Before modifying the rule, record the error and expected label.

@@ -1,0 +1,14 @@
+[project]
+name = "clinical-nlp-book"
+version = "0.1.0"
+description = "A Quarto book on clinical NLP with interactive marimo examples"
+readme = "README.md"
+authors = [
+    { name = "Will Thompson", email = "wkt@northwestern.edu" }
+]
+requires-python = ">=3.12"
+dependencies = ["marimo>=0.20,<1"]
+
+[build-system]
+requires = ["uv_build>=0.13.1,<0.14.0"]
+build-backend = "uv_build"

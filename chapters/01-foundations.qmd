@@ -1,0 +1,31 @@
+# What is a clinical NLP task?
+
+A clinical NLP project starts with a **decision and a unit of analysis**, not a model. Consider a question: “Does this note document that the patient currently has pneumonia?” A search for `pneumonia` cannot answer it by itself:
+
+| Fictional note fragment | Why a keyword match is insufficient |
+|---|---|
+| “Assessment: pneumonia.” | An affirmed current mention. |
+| “No evidence of pneumonia.” | The condition is explicitly negated. |
+| “Pneumonia in 2019, resolved.” | Historical, not necessarily current. |
+| “Rule out pneumonia.” | A diagnostic possibility, not an established diagnosis. |
+| “Mother had pneumonia.” | The experiencer is not the patient. |
+
+For this question, a useful representation is a **mention** (text span and location), a **concept** (what the span refers to), and **context attributes** (negation, time, uncertainty, and experiencer). Only then can we define a note-level or patient-level answer. A patient may have multiple notes with conflicting statements; collapsing mentions into one label requires a separate aggregation rule.
+
+## Specify the task before collecting labels
+
+Write down:
+
+- **Population and source:** which patients, institutions, note types, and dates are in scope?
+- **Target:** mentions, note-level status, or patient-level status? What counts as positive?
+- **Reference standard:** who annotates, with what guidelines, and how are disagreements resolved?
+- **Intended use:** cohort discovery, research abstraction, or clinical workflow? The cost of a false positive depends on the use.
+- **Data access:** who can view the notes, where can they be processed, and what outputs may leave the environment?
+
+Clinical text can contain protected health information (PHI). Synthetic examples make a tutorial reproducible, but are **not** a privacy guarantee for real workflows. Real data requires institutional approval, appropriate access controls, and review of the entire processing and logging pipeline.
+
+## A simple annotation contract
+
+In the next chapter, we use a deliberately narrow contract: each fictional note contains exactly one mention of `pneumonia`. The gold label is one of `present`, `absent`, `historical`, `possible`, or `other_experiencer`. This makes the mechanics visible. Actual notes can have zero or many mentions, mixed assertions, abbreviations, templates, and inconsistent timelines.
+
+**Try it:** For the five fragments above, assign a label under this contract. Would your answer change if the task were “ever had pneumonia” instead of “currently has pneumonia”?

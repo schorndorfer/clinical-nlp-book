@@ -1,0 +1,31 @@
+# Preface {.unnumbered}
+
+Clinical notes contain observations, hypotheses, plans, and copied history. Turning their words into reliable data requires more than finding medical terms: a mention may be negated, historical, hypothetical, or about someone other than the patient.
+
+This book is a practical introduction to clinical natural language processing (NLP). We will define tasks, build transparent baselines, evaluate errors, and consider what it takes to use an NLP system responsibly. Examples use **entirely fictional, synthetic notes**. Do not paste real patient information into the notebooks or commit it to this repository.
+
+## Who this is for
+
+Readers should be comfortable with basic Python. No clinical training is required, but any application to clinical care requires domain expertise, governance, and validation beyond the exercises here.
+
+## How to use this book
+
+Read the chapters in order. Chapters contain explanations and links to [marimo](https://marimo.io/) notebooks that you can run locally. The rendered book does not execute notebooks; examples are interactive in marimo and the prose stands on its own.
+
+From the project root:
+
+```bash
+uv sync
+uv run marimo edit notebooks/01_assertions.py
+```
+
+To render the book, install [Quarto](https://quarto.org/docs/get-started/) and run `quarto render`. See the repository README for development commands.
+
+## Planned path
+
+1. Define the unit of analysis and the clinical question.
+2. Extract condition mentions and characterize assertions.
+3. Evaluate errors with explicit annotation rules and patient-level splits.
+4. Later chapters can cover terminology normalization, de-identification, longitudinal reasoning, statistical models, and deployment.
+
+> **Scope:** The rules and numbers in this book are teaching examples, not medical devices or validated clinical decision-support tools.
